@@ -16,7 +16,7 @@ export default {
 
 async function handleRequest(request,env,event) {
   try {
-    let response = await caches.default.match(event.request.url);
+    let response = await caches.default.match(request.url);
 
     if (!response) {
       const r = new Router();
@@ -24,13 +24,13 @@ async function handleRequest(request,env,event) {
       r.post("/setcookies", (req) => handleSetCookies(req));
       r.get("/", () => handleIndexRequest(env));
 
-      response = await r.route(event.request);
+      response = await r.route(request);
 
       if (env.TILE_CACHE_SECS > 0 && response.status === 200) {
         response = new Response(response.body, response);
         response.headers.append("Access-Control-Allow-Origin", "*");
         response.headers.append("Cache-Control", `s-maxage=${env.TILE_CACHE_SECS}`);        
-        event.waitUntil(caches.default.put(event.request.url, response.clone()));
+        event.waitUntil(caches.default.put(request.url, response.clone()));
       }
     }
 
