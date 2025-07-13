@@ -73,7 +73,7 @@ const GLOBAL_MAP_URL =
       "{activity}/{color}/{z}/{x}/{y}{res}.png?v=19{res256}";
   // "tiles-auth/{activity}/{color}/{z}/{x}/{y}{res}.png?v=19";
 
-async function handleTileProxyRequest(request) {
+async function handleTileProxyRequest(request,env) {
   const url = new URL(request.url);
   
   const match = url.pathname.match(
