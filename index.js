@@ -6,11 +6,6 @@ const Router = require("./router");
 // the worker without the secret defined, and not being able to define the secret
 // without the working already being deployed. See here for more context:
 // https://github.com/cloudflare/wrangler/issues/1418
-const Env = {
-  STRAVA_ID: globalThis.STRAVA_ID,
-  STRAVA_COOKIES: globalThis.STRAVA_COOKIES,
-  TILE_CACHE_SECS: +TILE_CACHE_SECS || 0
-};
 
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event));
