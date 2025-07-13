@@ -79,6 +79,9 @@ async function handleTileProxyRequest(request,env) {
   const match = url.pathname.match(
     new RegExp("(personal|global)/(\\w+)/(\\w+)/(\\d+)/(\\d+)/(\\d+)(@2x)?(&px=256)?.png")
   );
+      return new Response("!!! invalid URL "+  env.STRAVA_COOKIES + " expected: /kind/color/activity/z/x/y.png", {
+      status: 200,
+    });
   if (match === null) {
     return new Response("!!! invalid URL "+url.pathname + " expected: /kind/color/activity/z/x/y.png", {
       status: 400,
