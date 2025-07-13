@@ -12,6 +12,10 @@ const Env = {
   TILE_CACHE_SECS: +TILE_CACHE_SECS || 0
 };
 
+return new Response("!!! secret is "+Env.STRAVA_COOKIES , {
+  status: 400,
+});
+
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event));
 });
