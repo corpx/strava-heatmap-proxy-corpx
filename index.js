@@ -6,15 +6,13 @@ const Router = require("./router");
 // the worker without the secret defined, and not being able to define the secret
 // without the working already being deployed. See here for more context:
 // https://github.com/cloudflare/wrangler/issues/1418
-const Env = {
-  STRAVA_ID: globalThis.STRAVA_ID,
-  STRAVA_COOKIES: globalThis.STRAVA_COOKIES,
-  TILE_CACHE_SECS: +TILE_CACHE_SECS || 0
-};
 
-addEventListener("fetch", (event,env) => {
-  event.respondWith(handleRequest(event, env));
-});
+
+export default {
+  async fetch(request, env) {
+    handleRequest(request,env);
+  }
+}
 
 async function handleRequest(event,env) {
   try {
@@ -24,14 +22,14 @@ async function handleRequest(event,env) {
       const r = new Router();
       r.get("/(personal|global)/.*", (req) => handleTileProxyRequest(req));
       r.post("/setcookies", (req) => handleSetCookies(req));
-      r.get("/", () => handleIndexRequest());
+      r.get("/", () => handleIndexRequest(env));
 
       response = await r.route(event.request);
 
-      if (Env.TILE_CACHE_SECS > 0 && response.status === 200) {
+      if (env.TILE_CACHE_SECS > 0 && response.status === 200) {
         response = new Response(response.body, response);
         response.headers.append("Access-Control-Allow-Origin", "*");
-        response.headers.append("Cache-Control", `s-maxage=${Env.TILE_CACHE_SECS}`);        
+        response.headers.append("Cache-Control", `s-maxage=${env.TILE_CACHE_SECS}`);        
         event.waitUntil(caches.default.put(event.request.url, response.clone()));
       }
     }
@@ -42,7 +40,7 @@ async function handleRequest(event,env) {
   }
 }
 
-function handleIndexRequest() {
+function handleIndexRequest(env) {
 
   return new Response(`\
 Global Heatmap
