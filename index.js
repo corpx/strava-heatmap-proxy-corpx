@@ -16,7 +16,7 @@ addEventListener("fetch", (event,env) => {
   event.respondWith(handleRequest(event, env));
 });
 
-async function handleRequest(event) {
+async function handleRequest(event,env) {
   try {
     let response = await caches.default.match(event.request.url);
 
