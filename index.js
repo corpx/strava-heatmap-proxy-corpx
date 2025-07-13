@@ -101,7 +101,7 @@ async function handleTileProxyRequest(request,env) {
   // replace templated data in base URL
   const proxyUrl = baseUrl.replace(/\{(\w+)\}/g, (_, key) => data[key]);
 
-  const proxiedRequest = new Request("https://blog.afi.io/content/images/2025/04/image-3.png", {
+  const proxiedRequest = new Request("https://content-a.strava.com/identified/globalheat/sport_Run/blue/11/467/843.png", {
     method: "GET",
     headers: new Headers({ Cookie: env.STRAVA_COOKIES }),
   });
