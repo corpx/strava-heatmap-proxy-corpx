@@ -87,7 +87,7 @@ async function handleTileProxyRequest(request) {
 
   const [_, kind, color, activity, z, x, y, res, res256] = match;
   const data = {
-    strava_id: Env.STRAVA_ID,
+    strava_id: env.STRAVA_ID,
     color,
     activity,
     x,
@@ -103,7 +103,7 @@ async function handleTileProxyRequest(request) {
 
   const proxiedRequest = new Request(proxyUrl, {
     method: "GET",
-    headers: new Headers({ Cookie: Env.STRAVA_COOKIES }),
+    headers: new Headers({ Cookie: env.STRAVA_COOKIES }),
   });
 
   return await fetch(proxiedRequest);
