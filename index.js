@@ -9,12 +9,12 @@ const Router = require("./router");
 
 
 export default {
-  async fetch(request, env) {
-    return handleRequest(request,env);
+  async fetch(request, env,ctx) {
+    return handleRequest(request,env,ctx);
   }
 }
 
-async function handleRequest(event,env) {
+async function handleRequest(request,env,event) {
   try {
     let response = await caches.default.match(event.request.url);
 
