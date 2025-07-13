@@ -20,9 +20,9 @@ async function handleRequest(request,env,event) {
 
     if (!response) {
       const r = new Router();
-      r.get("/(personal|global)/.*", (req,env) => handleTileProxyRequest(req,env));
-      r.post("/setcookies", (req) => handleSetCookies(req));
-      r.get("/", (env) => handleIndexRequest(env));
+      r.get("/(personal|global)/.*", (request) => handleTileProxyRequest(request,env));
+      r.post("/setcookies", (request) => handleSetCookies(request));
+      r.get("/", (request) => handleIndexRequest(env));
 
       response = await r.route(request);
 
