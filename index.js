@@ -54,7 +54,7 @@ Personal Heatmap
 
   color choices: orange, hot, blue, bluered, purple, gray
   activity choices : all, ride, winter, run, water
-` + Env.STRAVA_COOKIES + ` or the alt is ` + globalThis.STRAVA_ID);
+` + Env.STRAVA_COOKIES + ` or the alt is ` + globalThis.STRAVA_COOKIES);
 }
 
 const PERSONAL_MAP_URL =
