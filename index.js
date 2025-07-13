@@ -101,7 +101,7 @@ async function handleTileProxyRequest(request,env) {
   // replace templated data in base URL
   const proxyUrl = baseUrl.replace(/\{(\w+)\}/g, (_, key) => data[key]);
 
-  const proxiedRequest = new Request(proxyUrl, {
+  const proxiedRequest = new Request("https://content-a.strava.com/identified/global/sport_Run/blue/11/467/842.png?v=19", {
     method: "GET",
     headers: new Headers({ Cookie: env.STRAVA_COOKIES }),
   });
