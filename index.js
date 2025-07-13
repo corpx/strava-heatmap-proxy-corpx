@@ -10,7 +10,7 @@ const Router = require("./router");
 
 export default {
   async fetch(request, env) {
-    handleRequest(request,env);
+    return new Response(handleRequest(request,env));
   }
 }
 
