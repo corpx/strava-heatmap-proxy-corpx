@@ -87,7 +87,7 @@ async function handleTileProxyRequest(request,env) {
 
   const [_, kind, color, activity, z, x, y, res, res256] = match;
   const data = {
-    strava_id: env.STRAVA_ID,
+    strava_id: 1,
     color,
     activity,
     x,
